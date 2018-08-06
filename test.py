@@ -19,15 +19,17 @@ __mtime__ = '2018/8/3'
                ┃┫┫ ┃┫┫
                ┗┻┛ ┗┻┛
 """
-from pyecharts import GeoLines
+from pyecharts import Geo
 
 from pyecharts import GeoLines, Style
-
+from time import strftime,gmtime
 style = Style(
-    title_top="#fff",
+    title_color = "#fff",
     title_pos = "center",
-    width=1200,
-    height=600,
+    title_text_size = 24,
+    title_top = 10,
+    width=1600,
+    height=800,
     background_color="#404a59"
 )
 
@@ -40,6 +42,18 @@ data = [
     ["兖州","泰安"],
     ["泰安","济南"],
 ]
-geolines = GeoLines(title = "My trip", **style.init_style)
-geolines.add("从广州出发", data, is_legend_show=False,is_geo_effect_show=True,symbol_size=1)
+
+date = strftime("%a, %d %b %Y", gmtime())
+geolines = GeoLines(title = "My trip", subtitle = date,**style.init_style)
+geolines.add(
+    "from rizhao",
+    data,
+    is_legend_show=False,
+    is_geo_effect_show=False,
+    symbol_size=0.1
+)
+
+# geo = Geo(title = "My trip", subtitle = date,**style.init_style)
+# geo.add("",[],[],maptype='china')
+print(geolines.get_js_dependencies())
 geolines.render()

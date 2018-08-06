@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The route of my trip</title>
+
+    <link rel="stylesheet" href="{% static "css/style.css"%}" media="screen" type="text/css" />
+    <script type="text/javascript" src="https://cdn.bootcss.com/modernizr/2010.07.06dev/modernizr.js
+"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+
+    {% for jsfile_name in script_list %}
+        <script src="{{ host }}/{{ jsfile_name }}.js"></script>
+    {% endfor %}
+</head>
+<body>
+  <form>
+      {% verbatim %}
+      <button class="login" v-if></button>
+      {% endverbatim %}
+    <textarea name="subject" placeholder="Please enter your message" class="message" required></textarea>
+    <textarea name="subject" placeholder="Please enter your message" class="message" required></textarea>
+    <input name="submit" class="btn" type="submit" value="Send" />
+  </form>
+
+    {{ myecharts|safe }}
+
+  <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
+</body>
+</html>
