@@ -14,7 +14,7 @@ form {
     margin-top: 10px;
     width: 343px;
     height: auto;
-    padding:30px 30px 30px 30px;
+    padding:20px 30px 30px 30px;
     border: 1px solid rgba(0,0,0,.2);
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -34,10 +34,63 @@ form {
 
 div {
     z-index: -1;
+    margin-top: 5px;
+}
+
+div.form-top{
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+p.welcome{
+    color: #ffffff;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    display: inline;
+    font-size: 25px;
+}
+
+button{
+    position:relative;
+	padding:1em 1.5em;
+	border:none;
+	background-color:transparent;
+	cursor:pointer;
+	outline:none;
+	font-size:20px;
+	margin-top: 0px;
+}
+button.history{
+    color: #ffffff;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+button.history.history:before,button.history.history:after{
+    content:"";
+	display:inline;
+	position:absolute;
+	top:100%;
+	left:0;
+	width:100%;
+	height:2px;
+	background-color:#16a085;
+	transition:all 0.3s ease;
+	transform:scale(0.85);
+}
+
+button.history:hover:before{
+    top:0;
+	transform:scale(1);
+}
+
+button.history:hover:after{
+	transform:scale(1);
 }
 textarea{
-	  background: rgba(255, 255, 255, 0.4) url(http://luismruiz.com/img/gemicon_message.png) no-repeat scroll 16px 16px; 
-    width: 276px;
+	  background: rgba(255, 255, 255, 0.4) no-repeat scroll 16px 16px;
+    width: 220px;
     height: 37px;
     border: 1px solid rgba(255,255,255,.6);
     -moz-border-radius: 4px;
@@ -50,11 +103,15 @@ textarea{
     font-family: 'Source Sans Pro', sans-serif;
     font-size:18px;
     color:#fff;
-    padding-left:45px;
+    padding-left:20px;
     padding-right:20px;
     padding-top:12px;
     margin-bottom:20px;
     overflow:hidden;
+}
+
+button.add-button{
+    float: left;
 }
 
 input {
@@ -76,7 +133,7 @@ input {
     margin-bottom:20px;
 }
 
-input[type=submit] {
+input[type=button] {
     cursor:pointer;
 }
 

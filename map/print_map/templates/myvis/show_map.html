@@ -18,16 +18,27 @@
 </head>
 <body>
   <form>
-      {% verbatim %}
-      <button class="login" v-if></button>
-      {% endverbatim %}
-    <textarea name="subject" placeholder="Please enter your message" class="message" required></textarea>
-    <textarea name="subject" placeholder="Please enter your message" class="message" required></textarea>
-    <input name="submit" class="btn" type="submit" value="Send" />
+      <div class="form-top">
+          {% if username != "" %}
+            <p class="welcome">Welcome</p>
+            <button class="button history">history</button>
+            <button class="button history">logout</button>
+          {% else %}
+            <button class="button history" title="you can login to save your trip">login</button>
+            <button class="button history" title="if you don't reg please register">register</button>
+          {% endif %}
+      </div>
+      <div id="citys">
+          <template v-for="city in citys">
+              <textarea name="subject" placeholder="Please enter city" class="message" v-model="city.name" required></textarea>
+          </template>
+          <input name="add" class="btn add-button" type="button" value="add city" v-on:click="addcity">
+          <input name="submit" class="btn" type="button" value="Get" v-on:click="submitcity"/>
+      </div>
   </form>
 
     {{ myecharts|safe }}
-
+  <script src="{% static "js/ngc.js"%} "></script>
   <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
 </body>
 </html>

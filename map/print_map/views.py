@@ -11,22 +11,51 @@ from time import strftime,gmtime
 import json
 
 # Create your views here.
+def inde(request):
+    return render(request, 'index.html')
 
+@csrf_exempt
 def index(request):
     REMOTE_HOST = "https://pyecharts.github.io/assets/js"
     template = loader.get_template('myvis/show_map.html')
+    
     if request.method == 'GET':
         map = print_map()
         
+        if 'id' in request.session.keys():
+            username = User.objects.get(id = request.session['id'])
+        else:
+            username = ""
+            
         context = dict(
             host = REMOTE_HOST,
             myecharts = map.render_embed(),
-            script_list = map.get_js_dependencies()
+            script_list = map.get_js_dependencies(),
+            username = username
         )
         
         return HttpResponse(template.render(context,request))
     elif request.method == 'POST':
-        pass
+        if 'id' in request.session.keys():
+            username = User.objects.get(id = request.session['id'])
+        else:
+            username = ""
+            
+        city = QueryDict(request.body)['city']
+        city = city.split("+")
+        print(city)
+        print(type(city))
+        map = print_map(trip=city)
+        
+        context = dict(
+            host = REMOTE_HOST,
+            myecharts = map.render_embed(),
+            script_list = map.get_js_dependencies(),
+            username = username
+        )
+        
+        return HttpResponse(template.render(context,request))
+        
     else:
         return HttpResponse("Your method must post or get")
 
@@ -51,7 +80,8 @@ def print_map(trip = []):
     
     if trip != [] :
         geolines = GeoLines(title="My trip",subtitle=date,**style.init_style)
-    
+        
+        trip = handle_citys(trip)
         geolines.add(
             "one trip",
             data=trip,
@@ -97,9 +127,7 @@ def login(request):
             response_data['message'] = 'you have log in'
             return JsonResponse(response_data)
         else:
-            print(type(request.body))
             login_data = QueryDict(request.body)
-            print(login_data)
             if 'username' not in login_data.keys() or login_data['username'] == "":
                 response_data['status'] = 'error'
                 response_data['message'] = 'username can\'t be void'
@@ -142,7 +170,7 @@ def register(request):
     '''
     response_data = {}
     if request.method == "POST":
-        if 'user_id' in request.session.keys():
+        if 'id' in request.session.keys():
             response_data['status'] = 'error'
             response_data['message'] = 'you have log in'
             return JsonResponse(response_data)

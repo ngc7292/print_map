@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'print_map'
+    'print_map',
+    'webpack_loader',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'map.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,6 +123,12 @@ STATIC_URL = '/static/'
 
 
 STATICFILES_DIRS = (
-    # os.path.join(BASE_DIR, 'static')
-    os.path.join(os.path.dirname(__file__), '../static/').replace('\\', '/'),
+    os.path.join(BASE_DIR, 'frontend/dist/static'),
+    # os.path.join(os.path.dirname(__file__), '../static/').replace('\\', '/'),
 )
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'dist/'
+    }
+}

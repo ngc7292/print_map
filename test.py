@@ -33,15 +33,7 @@ style = Style(
     background_color="#404a59"
 )
 
-data = [
-    ["日照","莒县",10],
-    ["莒县","临沂",20],
-    ["临沂","费县"],
-    ["费县","曲阜"],
-    ["曲阜","兖州"],
-    ["兖州","泰安"],
-    ["泰安","济南"],
-]
+data = []
 
 date = strftime("%a, %d %b %Y", gmtime())
 geolines = GeoLines(title = "My trip", subtitle = date,**style.init_style)
