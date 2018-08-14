@@ -12,18 +12,18 @@ import json
 
 # Create your views here.
 def inde(request):
-    return render(request, 'index.html')
+    return render(request, 'map.html')
 
 @csrf_exempt
-def index(request):
+def get_map(request):
     REMOTE_HOST = "https://pyecharts.github.io/assets/js"
-    template = loader.get_template('myvis/show_map.html')
+    # template = loader.get_template('myvis/show_map.html')
     
     if request.method == 'GET':
         map = print_map()
         
         if 'id' in request.session.keys():
-            username = User.objects.get(id = request.session['id'])
+            username = User.objects.get(id = request.session['id']).username
         else:
             username = ""
             
@@ -34,10 +34,10 @@ def index(request):
             username = username
         )
         
-        return HttpResponse(template.render(context,request))
+        return JsonResponse(context)
     elif request.method == 'POST':
         if 'id' in request.session.keys():
-            username = User.objects.get(id = request.session['id'])
+            username = User.objects.get(id = request.session['id']).username
         else:
             username = ""
             
@@ -54,7 +54,7 @@ def index(request):
             username = username
         )
         
-        return HttpResponse(template.render(context,request))
+        return JsonResponse(context)
         
     else:
         return HttpResponse("Your method must post or get")

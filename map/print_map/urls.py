@@ -21,12 +21,12 @@ __mtime__ = '2018/8/4'
 """
 from django.conf.urls import url
 from django.urls import path
-from .views import login,register,logout,index,inde
+from .views import login,register,logout,get_map,inde
 
 urlpatterns = [
     url('user/login',login),
     url('user/register',register),
     url('user/logout',logout),
-    url('map',index),
+    url('map',get_map),
     url('',inde),
 ]

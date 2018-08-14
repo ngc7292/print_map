@@ -47,5 +47,5 @@ geolines.add(
 
 # geo = Geo(title = "My trip", subtitle = date,**style.init_style)
 # geo.add("",[],[],maptype='china')
-print(geolines.get_js_dependencies())
-geolines.render()
+print(geolines.echarts_options())
+#geolines.render()

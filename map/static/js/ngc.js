@@ -41,4 +41,15 @@ var addCitys = new Vue({
             });
         }
     }
+});
+
+var login = new Vue({
+    el:"#form-top",
+    data:{
+        formss:"            <p class=\"welcome\">Welcome</p>\n" +
+        "            <button class=\"button history\">history</button>\n" +
+        "            <button class=\"button history\">logout</button>"
+    }
 })
+
+
