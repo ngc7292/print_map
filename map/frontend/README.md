@@ -1,4 +1,4 @@
-# showmap
+# frontend
 
 > A Vue.js project
 
